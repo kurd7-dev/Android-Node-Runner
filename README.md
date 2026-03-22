@@ -36,3 +36,23 @@ Each bot dashboard contains:
 ## Notes
 - Embedded Node startup is wired via JNI (`native-lib` + `node` shared libraries).
 - You still need to package/provide `libnode.so` for target ABIs.
+
+
+### Wrapper bootstrap (for binary-restricted Git hosting)
+This repository intentionally does **not** commit `gradle/wrapper/gradle-wrapper.jar`
+in order to avoid branch-update failures on platforms that reject binary files.
+
+Install Gradle locally in the project (if your machine does not have Gradle):
+```bash
+./scripts/install-gradle.sh
+```
+
+Generate wrapper files locally:
+```bash
+./scripts/bootstrap-gradle-wrapper.sh
+```
+
+Then run:
+```bash
+./.tools/gradle-8.14.3/bin/gradle assembleDebug
+```
